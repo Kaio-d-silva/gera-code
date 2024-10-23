@@ -15,3 +15,6 @@ def open_vscode(path):
     # ABRE O VS CODE NA PASTA DO PROJETO NOVO CRIADO
     subprocess.run(f'''code {path}''', shell=True, check=True, executable='/bin/bash')
     
+def install_tkinter():
+    subprocess.run(f'''sudo apt-get install python3-tk''', shell=True, check=True, executable='/bin/bash')
+    
