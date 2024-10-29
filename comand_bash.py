@@ -17,4 +17,15 @@ def open_vscode(path):
     
 def install_tkinter():
     subprocess.run(f'''sudo apt-get install python3-tk''', shell=True, check=True, executable='/bin/bash')
+        
+def change_dir_home():
+    subprocess.run(f'''cd ~''', shell=True, check=True, executable='/bin/bash')
+    
+def install_node():
+    subprocess.run(f'''curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh''', shell=True, check=True, executable='/bin/bash')
+    subprocess.run(f'''sudo bash /tmp/nodesource_setup.sh''', shell=True, check=True, executable='/bin/bash')
+    subprocess.run(f'''sudo apt install nodejs -y''', shell=True, check=True, executable='/bin/bash')
+
+def create_react_project(path):
+    subprocess.run(f'''npx create-react-app {path} --template typescript''', shell=True, check=True, executable='/bin/bash')
     
