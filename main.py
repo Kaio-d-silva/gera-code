@@ -1,7 +1,8 @@
-from get_path_directory import get_path_directory
-from check_path_folder import check_path, go_to, checks_files
-from user_input import user_input_dir,options,select_project
+# from get_path_directory import get_path_directory
+# from check_path_folder import check_path, go_to, checks_files
+# from user_input import user_input_dir,options,select_project
 from comand_bash import *
+from maneger_dir import *
 
 # VERIFICA QUAL É O DIRETORIO PADRAO
 project_diretory = get_path_directory()
@@ -9,11 +10,15 @@ project_diretory = get_path_directory()
 # VERIFICA SE EXISTE O DIRETÓRIO PADRÃO CASO NÃO ELE O CRIA
 check_path(project_diretory)
 
+# VAI PARA DIRETORIO DO PROJETO 
+go_to(project_diretory)
+
 # SOLICITA AO USUÁRIO UM NOME PARA O PROJETO A SER CRIADO
 path_full_new_project = user_input_dir(project_diretory)
 
 # VERIFICA SE EXISTE O DIRETÓRIO PADRÃO CASO NÃO ELE O CRIA
 check_path(path_full_new_project)
+
 # ENTRA NO DIRETÓRIO
 go_to(path_full_new_project)
 
@@ -44,3 +49,5 @@ elif selected_project == "Node":
     
 
 open_vscode(path_full_new_project)
+
+
