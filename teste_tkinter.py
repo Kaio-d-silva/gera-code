@@ -2,10 +2,26 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 
+def gerar_projeto():
+    ...
 
-def teste():
-    print("teste")
+def valida_input(input):
+    return input.isalnum()
+    ...
+def informa_rota(label,entrada,selecao):
+    nome = entrada.get()
+    linguagem = selecao.get()
+    
+    if valida_input(nome):
+        label.config(text=f"{nome}, {linguagem}")
+    else:
+        label.config(text="Nome invalido")
 
+# def enviar():
+#     nome = project_entry.get()
+#     linguagem = project_entry.get()
+    
+    
 
 
 window = tk.Tk()
@@ -24,16 +40,20 @@ project_entry.grid(row=1,column=0,columnspan=2)
 label_select_langue = Label(window, text="selecione uma linguagem")
 label_select_langue.grid(row=2,column=0)
 
+# terceira label teste
+label_teste = Label(window,text="")
+label_teste.grid(row=7,column=0)
+
 # Seleção da linguagem
-teste = ttk.Combobox(window, values=["Python","Node"])
-teste.grid(row=4, column=0, columnspan=2)
+caixa_de_selecao = ttk.Combobox(window, values=["Python","Node"])
+caixa_de_selecao.grid(row=4, column=0, columnspan=2)
 
 # Botão Enviar
-botão_enviar = Button(window, text="Enviar", command=teste)
+botão_enviar = Button(window, text="Enviar", command=lambda : informa_rota(label= label_teste,entrada=project_entry,selecao=caixa_de_selecao))
 botão_enviar.grid(row=5, column=0)
 
 # Botão salvar
-botão_enviar = Button(window, text="Salvar", command=teste)
+botão_enviar = Button(window, text="Gerar", command=gerar_projeto())
 botão_enviar.grid(row=6, column=0)
 
 
