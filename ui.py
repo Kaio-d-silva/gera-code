@@ -16,11 +16,6 @@ def informa_rota(label,entrada,selecao):
         label.config(text=f"{nome}, {linguagem}")
     else:
         label.config(text="Nome invalido")
-
-# def enviar():
-#     nome = project_entry.get()
-#     linguagem = project_entry.get()
-    
     
 
 
@@ -30,31 +25,34 @@ window.config(padx=50, pady=100)
 
 # Primeira label
 label_entry = Label(window, text="Digite o nome do projeto sem espaços e acentuação:")
-label_entry.grid(row=0,column=0)
+label_entry.pack(pady=5)
 
-# Entrada
-project_entry = Entry()
-project_entry.grid(row=1,column=0,columnspan=2)
+# Entrada o usuario
+language_entry = Entry()
+language_entry.pack(pady=5)
 
 # Segunda label
 label_select_langue = Label(window, text="selecione uma linguagem")
-label_select_langue.grid(row=2,column=0)
-
-# terceira label teste
-label_teste = Label(window,text="")
-label_teste.grid(row=7,column=0)
+label_select_langue.pack(pady=5)
 
 # Seleção da linguagem
-caixa_de_selecao = ttk.Combobox(window, values=["Python","Node"])
-caixa_de_selecao.grid(row=4, column=0, columnspan=2)
+check_box = ttk.Combobox(window, values=["Python","Node"])
+check_box.pack(pady=5) 
 
 # Botão Enviar
-botão_enviar = Button(window, text="Enviar", command=lambda : informa_rota(label= label_teste,entrada=project_entry,selecao=caixa_de_selecao))
-botão_enviar.grid(row=5, column=0)
+send_buton = Button(window, text="Enviar", command=lambda : informa_rota(label= result_label,entrada=language_entry,selecao=check_box))
+send_buton.pack(pady=5)
+
+# terceira label teste
+result_label = Label(window,text="")
+result_label.pack(pady=5)
 
 # Botão salvar
-botão_enviar = Button(window, text="Gerar", command=gerar_projeto())
-botão_enviar.grid(row=6, column=0)
+generate_button = Button(window, text="Gerar", command=gerar_projeto())
+generate_button.pack(pady=5)
+
+
+
 
 
 window.mainloop()
