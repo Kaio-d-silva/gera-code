@@ -20,7 +20,7 @@ def go_to(directory):
     # ENTRA NO DIRETÓRIO PADRÃO
     os.chdir(directory)
     
-def checks_files(full_path):
+def check_file(full_path):
     # VERIFICA SE NA RAIZ DO PROJETO EXISTE UM ARQUIVO MAIN
     # CASO NÃO ELE É CRIADO
     if os.path.isfile(f'{full_path}/main.py') == False:

@@ -1,7 +1,7 @@
 import tkinter as tk 
 from tkinter import ttk
 from tkinter import *
-from handlers import validate_input
+from handlers import validate_input, save_data
 
 class App():
     def __init__(self):
@@ -47,6 +47,8 @@ class App():
         name = self.language_entry.get()
         language = self.check_box.get()
         
+        if validate_input(name):
+            diretorio = save_data(name, language)
         
         
     def display_route(self):
