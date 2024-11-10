@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from handlers import validate_input, save_data
+from comand_bash import open_vscode
 
 class App():
     def __init__(self):
@@ -44,12 +45,17 @@ class App():
         self.window.mainloop()
         
     def generate_project(self):
-        name = self.language_entry.get()
+        name_project = self.language_entry.get()
         language = self.check_box.get()
         
-        if validate_input(name):
-            diretorio = save_data(name, language)
-        
+        if validate_input(name_project):
+            path_full_new_project = save_data(name_project, language)
+            mensage = f"Projeto foi criado em {path_full_new_project}"
+            self.result_label.config(text=mensage)
+            open_vscode(path_full_new_project)
+        else:
+            self.result_label.config(text="Erro : Nome invalido")
+            
         
     def display_route(self):
         name = self.language_entry.get()

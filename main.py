@@ -50,7 +50,7 @@
 
 # open_vscode(path_full_new_project)
 
-from ui_classe import App
+from ui import App
 
 if __name__ == "__main__":
     app = App()
