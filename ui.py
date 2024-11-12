@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 from handlers import validate_input, save_data
 from comand_bash import open_vscode
+from subprocess import PIPE, Popen
 
 class App():
     def __init__(self):
@@ -40,6 +41,11 @@ class App():
         self.result_label = Label(self.window,text="")
         self.result_label.pack(pady=5)
 
+        # tela para mostra terminal
+        self.terminal_text = Text(self.window,height=10,width=80)
+        self.terminal_text.pack(pady=5)
+        
+        
         
     def run(self):
         self.window.mainloop()
@@ -49,6 +55,7 @@ class App():
         language = self.check_box.get()
         
         if validate_input(name_project):
+            self.run_bash("sudo apt update -y && sudo apt-get upgrade -y")
             path_full_new_project = save_data(name_project, language)
             mensage = f"Projeto foi criado em {path_full_new_project}"
             self.result_label.config(text=mensage)
@@ -67,5 +74,15 @@ class App():
             self.result_label.config(text="Nome invalido")
 
                 
-            
-            
+    def run_bash(self,command):
+        process = Popen(command,shell=True,stdout=PIPE,stderr=PIPE)
+        stdout,stderr = process.communicate()
+        self.terminal_text.delete(1.0,END)
+        self.terminal_text.insert(END, stdout.decode())
+        if stderr:
+            self.terminal_text.insert(END, stderr.decode())
+        
+    
+
+
+ 
