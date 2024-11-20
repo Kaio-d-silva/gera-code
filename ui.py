@@ -17,44 +17,44 @@ class App():
     def creat_widgets(self):
         # Primeira label
         self.label_entry = Label(self.window, text="Digite o nome do projeto sem espaços e acentuação:")
-        self.label_entry.pack(pady=5)
+        self.label_entry.grid(row=0, column=0, columnspan=7)
         
-         # Entrada o usuario
+        # Entrada o usuario
         self.language_entry = Entry()
-        self.language_entry.pack(pady=5)
+        self.language_entry.grid(row=1, column=2, columnspan=2, pady=5)
         
-        # teste rota
+        # label rota
         self.rota = Label(self.window, text="")    
-        self.rota.pack(ipady=5)
+        self.rota.grid(row=1, column=1,pady=5)
 
         # selecionar rota
         self.botao_de_selecao = Button(self.window, text="localizar", command=self.select_path)
-        self.botao_de_selecao.pack(padx=5)        
+        self.botao_de_selecao.grid(row=2, column=2,columnspan=2, pady=5)       
         
        
         # Segunda label
         self.label_select_langue = Label(self.window, text="selecione uma linguagem")
-        self.label_select_langue.pack(pady=5)
+        self.label_select_langue.grid(row=3, column=2, columnspan=2)
 
         # Seleção da linguagem
         self.check_box = ttk.Combobox(self.window, values=["Python","Node"])
-        self.check_box.pack(pady=5) 
+        self.check_box.grid(row=4, columnspan=2, column=2) 
 
         # Botão Enviar
         self.send_buton = Button(self.window, text="Enviar", command=self.display_route)
-        self.send_buton.pack(pady=5)
+        self.send_buton.grid(row=5, column=2, padx=2, pady=5)
 
         # Botão salvar
         self.generate_button = Button(self.window, text="Gerar", command=self.generate_project)
-        self.generate_button.pack(pady=5)
+        self.generate_button.grid(row=5, column=3, padx=2, pady=5)
         
         # terceira label teste
         self.result_label = Label(self.window,text="")
-        self.result_label.pack(pady=5)
+        self.result_label.grid(row=6, column=2, columnspan=2)
         
         # tela de saida do terminal
         self.bash_output = tk.Text(self.window, height=10, width=80)
-        self.bash_output.pack(pady=5)
+        self.bash_output.grid(row=7, column=0, columnspan=7)
         self.get_default_directory()
 
         
