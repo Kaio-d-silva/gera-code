@@ -5,6 +5,7 @@ from tkinter import *
 from handlers import validate_input, save_data
 from comand_bash import open_vscode
 from subprocess import PIPE, Popen
+from maneger_dir import get_path_directory
 
 class App():
     def __init__(self):
@@ -54,7 +55,7 @@ class App():
         # tela de saida do terminal
         self.bash_output = tk.Text(self.window, height=10, width=80)
         self.bash_output.pack(pady=5)
-        self.select_path()
+        self.get_default_directory()
 
         
     def run(self):
@@ -66,7 +67,7 @@ class App():
         
         if validate_input(name_project):
             self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
-            path_full_new_project = save_data(name_project, language)
+            path_full_new_project = save_data(name_project, language, self.path_project)
             mensage = f"Projeto foi criado em {path_full_new_project}"
             self.result_label.config(text=mensage)
             open_vscode(path_full_new_project)
@@ -92,6 +93,11 @@ class App():
             self.bash_output.insert(tk.END, stderr.decode())          
             
     def select_path(self):
-        path_projeto = filedialog.askdirectory()
-        self.rota.config(text=path_projeto)           
+        self.path_project = filedialog.askdirectory()
+        self.rota.config(text=self.path_project)           
         # path_projeto = "home/projetos"
+    
+    def get_default_directory(self):
+        self.path_project = get_path_directory()
+        self.rota.config(text=self.path_project)           
+        

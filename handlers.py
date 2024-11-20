@@ -4,15 +4,15 @@ from options import verifica_linguagem
 def validate_input(input):
         return input.isalnum()
 
-def save_data(name_project, language):
-        path_directory = init_create_project()
+def save_data(name_project, language, path_directory):
+        # path_directory = init_create_project()
+        init_create_project(path_directory)
         return verifica_linguagem(path_directory,name_project,language)
         
         
-        
-def init_create_project():
-        path_diretory = get_path_directory()
-        check_path(path_diretory)
-        go_to(path_diretory)
-        return path_diretory
+def init_create_project(path_directory):
+        # path_diretory = get_path_directory()
+        check_path(path_directory)
+        go_to(path_directory)
+        # return path_diretory
         

@@ -6,7 +6,7 @@ def make_python_project(path_directory,name_project):
     check_path(path_full_new_project)
     go_to(path_full_new_project)
     check_file(path_full_new_project)
-    user_option = input("Quer instar o tkinter ? ")
+    user_option = input("Quer instalar o tkinter ? ")
     install_pip()
     creat_virtual_venv()
     if user_option == "SIM" or user_option == "sim" or user_option == "S" or user_option == "s":
