@@ -1,7 +1,5 @@
 import tkinter as tk 
-from tkinter import ttk
-from tkinter import filedialog
-from tkinter import *
+from tkinter import ttk, filedialog, Checkbutton, Label, Entry, Button
 from handlers import validate_input, save_data
 from comand_bash import open_vscode
 from subprocess import PIPE, Popen
@@ -37,8 +35,15 @@ class App():
         self.label_select_langue.grid(row=3, column=2, columnspan=2)
 
         # Seleção da linguagem
-        self.check_box = ttk.Combobox(self.window, values=["Python","Node"])
-        self.check_box.grid(row=4, columnspan=2, column=2) 
+        self.select_box = ttk.Combobox(self.window, values=["Python","Node"])
+        self.select_box.grid(row=4, columnspan=2, column=2) 
+        self.select_box.bind("<<ComboboxSelected>>", self.select_libraries)
+        
+        
+        # Seleção de biblioteca
+        self.check_box = Checkbutton(self.window, text="Tkinter ?", onvalue=1, offvalue=0)
+        self.check_box.grid(column=4, row=4)
+        self.check_box.grid_forget()
 
         # Botão Enviar
         self.send_buton = Button(self.window, text="Enviar", command=self.display_route)
@@ -63,11 +68,12 @@ class App():
         
     def generate_project(self):
         name_project = self.language_entry.get()
-        language = self.check_box.get()
+        language = self.select_box.get()
+        libs_language = self.check_box.getboolean
         
         if validate_input(name_project):
             self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
-            path_full_new_project = save_data(name_project, language, self.path_project)
+            path_full_new_project = save_data(name_project, language, self.path_project, libs_language)
             mensage = f"Projeto foi criado em {path_full_new_project}"
             self.result_label.config(text=mensage)
             open_vscode(path_full_new_project)
@@ -77,7 +83,7 @@ class App():
         
     def display_route(self):
         name = self.language_entry.get()
-        language = self.check_box.get()
+        language = self.select_box.get()
         
         if validate_input(name):
             self.result_label.config(text=f"{name}, {language}")
@@ -100,4 +106,10 @@ class App():
     def get_default_directory(self):
         self.path_project = get_path_directory()
         self.rota.config(text=self.path_project)           
+        
+    def select_libraries(self, event):
+        if self.select_box.get() == "Python":
+            self.check_box.grid(column=4, row=4, columnspan=2)
+        else: 
+            self.check_box.grid_forget()
         
