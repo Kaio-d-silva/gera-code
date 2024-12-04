@@ -41,25 +41,25 @@ class App():
         self.validate_buton = Button(self.window, text="Validar", command=self.display_route)
         self.validate_buton.grid(row=4, column=0, columnspan=2, padx=2, pady=5)
         
-        # label rota
-        self.path = Label(self.window, text="")    
-        self.path.grid(row=6, column=0,pady=5)
+        # # label rota
+        # self.path = Label(self.window, text="")    
+        # self.path.grid(row=6, column=0,pady=5)
 
         # label localizar pasta
         self.find_path = Label(self.window, text="escolha onde o projeto sera gerado")
-        self.find_path.grid(row=7, column=0, columnspan=2)
+        self.find_path.grid(row=6, column=0, columnspan=2)
         
         # entrada localiza pasta
         self.path_entry = Entry(self.window)
-        self.path_entry.grid(row=8, column=0, columnspan=2, pady=5)
+        self.path_entry.grid(row=7, column=0, columnspan=2, pady=5)
 
         # selecionar rota
         self.find_button = Button(self.window, text="localizar", command=self.select_path)
-        self.find_button.grid(row=9, column=0,columnspan=2, pady=5)       
+        self.find_button.grid(row=8, column=0,columnspan=2, pady=5)       
         
         # Botão gerar
         self.generate_button = Button(self.window, text="Gerar Projeto", command=self.generate_project)
-        self.generate_button.grid(row=10, column=0, columnspan=2,pady=5)
+        self.generate_button.grid(row=9, column=0, columnspan=2,pady=5)
         
         # valida nome do projeto
         # self.result_label = Label(self.window,text="")
@@ -81,16 +81,19 @@ class App():
         language = self.select_box.get()
         libs_language = self.check_box.getboolean
         
-        if validate_input(name_project):
-            # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
-            path_full_new_project = save_data(name_project, language, self.path_project, libs_language)
-            menssage = f"Projeto foi criado em {path_full_new_project}"
-            # self.result_label.config(text=mensage)
-            messagebox.showinfo("Informações",menssage)
-            open_vscode(path_full_new_project)
-        else:
-            messagebox.showerror("Não gerado", "ERRO : Nome ou linguagem invalidos")
-            # self.result_label.config(text="Erro : Nome invalido")
+        menssage = f"Seu projeto sera gerado em '/{self.path_project}/{name_project}'" 
+        resposta = messagebox.askokcancel("Gerar projeto",menssage)
+        if resposta:
+            if validate_input(name_project):
+                # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
+                path_full_new_project = save_data(name_project, language, self.path_project, libs_language)
+                menssage = f"Projeto foi criado em {path_full_new_project}"
+                # self.result_label.config(text=mensage)
+                messagebox.showinfo("Informações",menssage)
+                open_vscode(path_full_new_project)
+            else:
+                messagebox.showerror("Não gerado", "ERRO : Nome ou linguagem invalidos")
+                # self.result_label.config(text="Erro : Nome invalido")
             
         
     def display_route(self):
@@ -105,7 +108,7 @@ class App():
             messagebox.showerror(title="INVALIDO", message="Selecione uma linguagem")
             
         elif validate_input(name):
-            messagebox.showinfo(title="Informações", message=f"       *** Tudo certo ***\nescolha onde o projeto ira ficar")
+            messagebox.showinfo(title="Informações", message=f"       *** Tudo certo ***\nescolha onde o projeto sera gerado")
             # self.result_label.config(text=f"{name}, {language}") 
         else:
             print(len(message_output))
