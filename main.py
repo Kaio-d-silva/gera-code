@@ -47,7 +47,6 @@
 #     create_react_project(path_full_new_project)
      
     
-
 # open_vscode(path_full_new_project)
 
 from ui import App
