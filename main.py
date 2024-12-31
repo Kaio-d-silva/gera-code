@@ -49,8 +49,17 @@
     
 # open_vscode(path_full_new_project)
 
-from ui import App
+# from ui import App
 
-if __name__ == "__main__":
-    app = App()
-    app.run()
+# if __name__ == "__main__":
+#     app = App()
+#     app.run()
+
+from ui_pyside import GeradorDeProjetos
+from PySide6.QtWidgets import QApplication
+
+if __name__ == '__main__':
+    app = QApplication([])
+    gerador = GeradorDeProjetos()
+    gerador.show()
+    app.exec()
