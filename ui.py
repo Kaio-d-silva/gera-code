@@ -141,5 +141,3 @@ class App():
         else: 
             self.check_box.grid_forget()
         
-app = App()
-app.run()
