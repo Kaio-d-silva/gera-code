@@ -22,6 +22,7 @@ class GeradorDeProjetos(QWidget):
         
         # Define layout principal
         self.setLayout(self.layout_principal)
+        self.get_default_directory()
             
     def criar_formulario(self):
         # Cria Formulario 
@@ -81,7 +82,7 @@ class GeradorDeProjetos(QWidget):
         
         # Botão Gerar Projeto
         botao_gerar_projeto = QPushButton("Gerar Projeto")
-        botao_gerar_projeto.clicked.connect(self.atualizar_label)
+        botao_gerar_projeto.clicked.connect(self.generate_project)
         layout_form.addWidget(botao_gerar_projeto)
         
         return layout_form
@@ -109,7 +110,6 @@ class GeradorDeProjetos(QWidget):
         
     def display_route(self):
         nome = self.input_nome_projeto.text()
-        print(nome)
         linguagem = self.combobox.currentText()
         message_output = f"{nome}, {linguagem}"
         
@@ -128,6 +128,7 @@ class GeradorDeProjetos(QWidget):
             
     def select_path(self):
         diretorio = QFileDialog.getExistingDirectory(self, "Escolha um diretorio")
+        self.input_rota.clear()
         self.input_rota.insert(diretorio)
         
     def run_bash(self, command):
@@ -140,21 +141,34 @@ class GeradorDeProjetos(QWidget):
             
             
     # FALTA ISSO PRA MEXER O RESTO FOI PELO VISTO
-    # def generate_project(self):
-    #     name_project = self.name_project_entry.get()
-    #     language = self.select_box.get()
-    #     libs_language = self.check_box.getboolean
+    def generate_project(self):
+        name_project = self.input_nome_projeto.text()
+        linguagem = self.combobox.currentText()
+        # Vou ver esse ainda
+        bibliotecas = self.checkbox.isChecked()
         
-    #     menssage = f"Seu projeto sera gerado em '/{self.path_project}/{name_project}'" 
-    #     resposta = QMessageBox.askokcancel("Gerar projeto",menssage)
-    #     if resposta:
-    #         if validate_input(name_project):
-    #             # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
-    #             path_full_new_project = save_data(name_project, language, self.path_project, libs_language)
-    #             menssage = f"Projeto foi criado em {path_full_new_project}"
-    #             # self.result_label.config(text=mensage)
-    #             messagebox.showinfo("Informações",menssage)
-    #             open_vscode(path_full_new_project)
-    #         else:
-    #             messagebox.showerror("Não gerado", "ERRO : Nome ou linguagem invalidos")
-    #             # self.result_label.config(text="Erro : Nome invalido")
+        mensagem = f"Seu projeto sera gerado em '/{self.input_rota.text()}/{name_project}'" 
+        resposta = self.mensagem_de_aviso("Gerar projeto",mensagem)
+        if resposta == QMessageBox.Ok:
+            if validate_input(name_project):
+                # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
+                path_full_new_project = save_data(name_project, linguagem, self.path_project, bibliotecas)
+                menssage = f"Projeto foi criado em {path_full_new_project}"
+                QMessageBox.information(self,"Informações",menssage)
+                open_vscode(path_full_new_project)
+            else:
+                QMessageBox.warning(self,"Não gerado", "ERRO : Nome ou linguagem invalidos")
+                
+    
+    def mensagem_de_aviso(self, titulo, mensagem):
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle(titulo)
+        msg_box.setText(mensagem)
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        resposta = msg_box.exec()
+        return resposta
+    
+    def get_default_directory(self):
+        self.path_project = get_path_directory()
+        self.input_rota.insert(self.path_project)
