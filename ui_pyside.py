@@ -145,13 +145,17 @@ class GeradorDeProjetos(QWidget):
         name_project = self.input_nome_projeto.text()
         linguagem = self.combobox.currentText()
         # Vou ver esse ainda
-        bibliotecas = self.checkbox.isChecked()
+        bibliotecas = None
+        try:
+            bibliotecas = self.checkbox.isChecked()
+        except:
+            print("Sem bibliotecas")
         
         mensagem = f"Seu projeto sera gerado em '/{self.input_rota.text()}/{name_project}'" 
         resposta = self.mensagem_de_aviso("Gerar projeto",mensagem)
         if resposta == QMessageBox.Ok:
             if validate_input(name_project):
-                # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
+                self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
                 path_full_new_project = save_data(name_project, linguagem, self.path_project, bibliotecas)
                 menssage = f"Projeto foi criado em {path_full_new_project}"
                 QMessageBox.information(self,"Informações",menssage)
