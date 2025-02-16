@@ -1,5 +1,5 @@
-from comand_bash import *
-from maneger_dir import go_to, check_path, check_file
+from bash.comand_bash import *
+from handlers.maneger_dir import go_to, check_path, check_file
 
 def make_python_project(path_directory,name_project, libs):
     path_full_new_project = f"{path_directory}/{name_project}"

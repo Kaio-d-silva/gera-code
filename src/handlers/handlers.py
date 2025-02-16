@@ -1,5 +1,5 @@
-from maneger_dir import *
-from options import verifica_linguagem
+from handlers.maneger_dir import *
+from auxiliaries.options import verifica_linguagem
 
 def validate_input(input):
         return input.isalnum()

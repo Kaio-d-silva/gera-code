@@ -1,9 +1,9 @@
 # import tkinter as tk 
 from tkinter import ttk, filedialog, Checkbutton, Label, Entry, Button, messagebox, END, Text, Tk
-from handlers import validate_input, save_data
-from comand_bash import open_vscode
+from src.handlers.handlers import validate_input, save_data
+from src.bash.comand_bash import open_vscode
 from subprocess import PIPE, Popen
-from maneger_dir import get_path_directory
+from src.handlers.maneger_dir import get_path_directory
 
 class App():
     def __init__(self):

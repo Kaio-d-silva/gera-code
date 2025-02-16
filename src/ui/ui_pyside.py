@@ -1,8 +1,8 @@
 from PySide6.QtWidgets import QFileDialog, QCheckBox, QTextBrowser,QComboBox ,QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QListWidget, QListWidgetItem, QMessageBox, QInputDialog
-from handlers import validate_input, save_data
-from comand_bash import open_vscode
+from handlers.handlers import validate_input, save_data
+from bash.comand_bash import open_vscode
 from subprocess import PIPE, Popen
-from maneger_dir import get_path_directory
+from handlers.maneger_dir import get_path_directory
 
 
 
@@ -155,7 +155,7 @@ class GeradorDeProjetos(QWidget):
         resposta = self.mensagem_de_aviso("Gerar projeto",mensagem)
         if resposta == QMessageBox.Ok:
             if validate_input(name_project):
-                self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
+                # self.run_bash("sudo apt-get update -y && sudo apt-get upgrade -y")
                 path_full_new_project = save_data(name_project, linguagem, self.path_project, bibliotecas)
                 menssage = f"Projeto foi criado em {path_full_new_project}"
                 QMessageBox.information(self,"Informações",menssage)
