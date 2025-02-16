@@ -1,8 +1,8 @@
 import tkinter as tk 
 from tkinter import ttk
 from tkinter import *
-from handlers import validate_input, save_data
-from comand_bash import open_vscode
+from src.handlers.handlers import validate_input, save_data
+from src.bash.comand_bash import open_vscode
 
 class App():
     def __init__(self):
