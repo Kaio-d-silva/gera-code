@@ -9,9 +9,9 @@ from handlers.maneger_dir import get_path_directory
 class GeradorDeProjetos(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
         self.setWindowTitle('Gerador de Projetos')
         self.layout_principal = QHBoxLayout()
         self.setGeometry(100,100, 300, 100)
