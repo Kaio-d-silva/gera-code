@@ -94,9 +94,6 @@ class GeradorDeProjetos(QWidget):
         layout_quadro.addWidget(self.quadro)
         return layout_quadro
         
-    def atualizar_label(self):
-        print("teste")
-        
     def verifica_combobox(self):
         linguagem = self.combobox.currentText()
       
