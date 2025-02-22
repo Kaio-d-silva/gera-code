@@ -16,6 +16,7 @@ def change_dir_home():
 # Python ------------------------------------------
 def install_pip():
     subprocess.run(f'''sudo apt install python3-pip''', shell=True, check=True, executable='/bin/bash')
+    subprocess.run(f'''sudo python3 -m pip install --upgrade pip''', shell=True, check=True, executable='/bin/bash')
        
 def creat_virtual_venv():
     subprocess.run(f'''sudo apt install python3-venv''', shell=True, check=True, executable='/bin/bash')
