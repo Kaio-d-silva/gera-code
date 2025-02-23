@@ -3,6 +3,7 @@ from handlers.handlers import validate_input, save_data
 from bash.comand_bash import open_vscode
 from subprocess import PIPE, Popen
 from handlers.maneger_dir import get_path_directory
+from PySide6.QtGui import QIcon
 
 
 
@@ -12,13 +13,14 @@ class GeradorDeProjetos(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        self.setObjectName("Main")
         self.setWindowTitle('Gerador de Projetos')
         self.layout_principal = QHBoxLayout()
-        self.setGeometry(100,100, 300, 100)
+        self.setGeometry(100,100, 600, 400)
         
          # Adiciona formulario ao layout principal
         self.layout_principal.addLayout(self.criar_formulario())
-        self.layout_principal.addLayout(self.exibe_dados())
+        self.layout_principal.addWidget(self.exibe_dados())
         
         # Define layout principal
         self.setLayout(self.layout_principal)
@@ -28,13 +30,29 @@ class GeradorDeProjetos(QWidget):
         # Cria Formulario 
         layout_form = QVBoxLayout()
         
+        layout_info_projeto = self.informacoes_projeto()
+        layout_info_rota = self.informacoes_rota()
+        
+        
+        layout_form.addWidget(layout_info_projeto)
+        layout_form.addWidget(layout_info_rota)
+        
+        return layout_form
+        
+    def informacoes_projeto(self):
+        container_info_projetos = QWidget()
+        container_info_projetos.setObjectName("Info_projeto")
+        
+        layout_info_projeto = QVBoxLayout()
+        
         # Label Combobox
         layout_label = QHBoxLayout()
         label_linguagem = QLabel("Selecione uma linguagem")
+        label_linguagem.setObjectName("Label_linguagem")
         layout_label.addStretch()
         layout_label.addWidget(label_linguagem)
         layout_label.addStretch()
-        layout_form.addLayout(layout_label)
+        layout_info_projeto.addLayout(layout_label)
         
         # Combobox 
         self.layout_combobox = QHBoxLayout()
@@ -42,57 +60,88 @@ class GeradorDeProjetos(QWidget):
         self.combobox.addItems(["JavaScript","Python"])
         self.combobox.currentIndexChanged.connect(self.verifica_combobox)
         self.layout_combobox.addWidget(self.combobox)
-        layout_form.addLayout(self.layout_combobox)
+        layout_info_projeto.addLayout(self.layout_combobox)
         
         # Label input
         layout_label_nome = QHBoxLayout()
         label_input_nome = QLabel("Digite o nome do projeto")
+        label_input_nome.setObjectName("Label_input_nome")
         layout_label_nome.addStretch()
         layout_label_nome.addWidget(label_input_nome)
         layout_label_nome.addStretch()
-        layout_form.addLayout(layout_label_nome)
+        layout_info_projeto.addLayout(layout_label_nome)
         
         
         # Input nome do projeto
         self.input_nome_projeto = QLineEdit()
-        layout_form.addWidget(self.input_nome_projeto)
+        layout_info_projeto.addWidget(self.input_nome_projeto)
         
         # Botão validar
         botao_validar = QPushButton("Validar")
         botao_validar.clicked.connect(self.display_route)
-        layout_form.addWidget(botao_validar)
+        layout_info_projeto.addWidget(botao_validar)
+        container_info_projetos.setLayout(layout_info_projeto)
+        
+        return container_info_projetos
+
+       
+    def informacoes_rota(self):
+        container_info_rota = QWidget()
+        container_info_rota.setObjectName("Info_rota")
+        
+        layout_info_rota = QVBoxLayout()
         
         # Label rota projeto
-        layout_label_rota = QHBoxLayout()
+        # layout_label_rota = QHBoxLayout()
         label_input_rota = QLabel("Escolha onde o projeto sera gerado")
-        layout_label_rota.addStretch()
-        layout_label_rota.addWidget(label_input_rota)
-        layout_label_rota.addStretch()
-        layout_form.addLayout(layout_label_rota)
+        label_input_rota.setObjectName("Label_input_rota")
+        layout_info_rota.addWidget(label_input_rota)
+        # layout_info_rota.addLayout(layout_label_rota)
         
-        # Input rota do projeto
-        self.input_rota = QLineEdit()
-        layout_form.addWidget(self.input_rota)
-        
-        
-        # Botão localizar
-        botao_localizar = QPushButton("Localizar")
-        botao_localizar.clicked.connect(self.select_path)
-        layout_form.addWidget(botao_localizar)
+        input_rota = self.campo_input_rota()
+        layout_info_rota.addWidget(input_rota)
         
         # Botão Gerar Projeto
         botao_gerar_projeto = QPushButton("Gerar Projeto")
         botao_gerar_projeto.clicked.connect(self.generate_project)
-        layout_form.addWidget(botao_gerar_projeto)
+        layout_info_rota.addWidget(botao_gerar_projeto)
+        container_info_rota.setLayout(layout_info_rota)
         
-        return layout_form
+        return container_info_rota
+    
+    def campo_input_rota(self):
+        container_layout_input_rota = QWidget()
+        container_layout_input_rota.setMinimumWidth(30)
+        container_layout_input_rota.setMaximumHeight(40)
+        container_layout_input_rota.setObjectName("Campo_input_rota")
         
-       
+        layout_input_rota = QHBoxLayout()
+         # Input rota do projeto
+        self.input_rota = QLineEdit()
+        self.input_rota.setObjectName("Input_rota")
+        layout_input_rota.addWidget(self.input_rota)
+        
+        
+        # Botão localizar
+        botao_localizar = QPushButton("")
+        botao_localizar.setObjectName("Botao_localizar")
+        botao_localizar.setIcon(QIcon("src/assets/pasta_carton_vazia.png"))
+        botao_localizar.clicked.connect(self.select_path)
+        layout_input_rota.addWidget(botao_localizar)
+        
+        
+        container_layout_input_rota.setLayout(layout_input_rota)
+        return container_layout_input_rota
+        
     def exibe_dados(self):
+        container_layout_quadro = QWidget()
+        container_layout_quadro.setObjectName("Quadro_de_dados")
         layout_quadro = QVBoxLayout()
         self.quadro = QTextBrowser()
         layout_quadro.addWidget(self.quadro)
-        return layout_quadro
+        container_layout_quadro.setLayout(layout_quadro)
+        
+        return container_layout_quadro
         
     def verifica_combobox(self):
         linguagem = self.combobox.currentText()
@@ -108,7 +157,7 @@ class GeradorDeProjetos(QWidget):
     def display_route(self):
         nome = self.input_nome_projeto.text()
         linguagem = self.combobox.currentText()
-        message_output = f"{nome}, {linguagem}"
+        # message_output = f"{nome}, {linguagem}"
         
         
         if len(nome) == 0:

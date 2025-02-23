@@ -1,0 +1,40 @@
+#Main {
+    background-color: #252b36;
+}
+
+#Info_projeto , #Info_rota{
+    background-color: #2c3442;
+    color: white;
+    /* margin: 10px; */
+    padding: 10px;
+}
+
+#Label_linguagem, #Label_input_nome, #Label_input_rota{
+    color: white;
+    font-size: 13px;
+}
+
+#Quadro_de_dados ,QTextBrowser{
+    border-radius : 5px;
+    background-color: #324261;
+    padding: 10px;
+}
+
+#Botao_localizar{
+    background-color: #252B36;
+    border: none;
+}
+
+#Campo_input_rota{
+    background-color:  #252B36;
+    border-radius: 5px;
+}
+
+#Input_rota{
+    font-size: 13px;
+    padding: 5px;
+    border : none;
+    background-color: #252B36;
+    color: rgba(230, 243, 255, 0.349);
+    
+}
