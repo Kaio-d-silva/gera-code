@@ -4,6 +4,7 @@ from bash.comand_bash import open_vscode
 from subprocess import PIPE, Popen
 from handlers.maneger_dir import get_path_directory
 from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 
 
 
@@ -19,7 +20,7 @@ class GeradorDeProjetos(QWidget):
         self.setGeometry(100,100, 600, 400)
         
          # Adiciona formulario ao layout principal
-        self.layout_principal.addLayout(self.criar_formulario())
+        self.layout_principal.addWidget(self.criar_formulario())
         self.layout_principal.addWidget(self.exibe_dados())
         
         # Define layout principal
@@ -28,6 +29,8 @@ class GeradorDeProjetos(QWidget):
             
     def criar_formulario(self):
         # Cria Formulario 
+        container_formulario= QWidget()
+        container_formulario.setObjectName("Container_formulario")
         layout_form = QVBoxLayout()
         
         layout_info_projeto = self.informacoes_projeto()
@@ -36,8 +39,9 @@ class GeradorDeProjetos(QWidget):
         
         layout_form.addWidget(layout_info_projeto)
         layout_form.addWidget(layout_info_rota)
+        container_formulario.setLayout(layout_form)
         
-        return layout_form
+        return container_formulario
         
     def informacoes_projeto(self):
         container_info_projetos = QWidget()
@@ -57,7 +61,9 @@ class GeradorDeProjetos(QWidget):
         # Combobox 
         self.layout_combobox = QHBoxLayout()
         self.combobox = QComboBox()
+        self.combobox.setObjectName("Combobox")
         self.combobox.addItems(["JavaScript","Python"])
+        self.combobox.setFixedSize(160,25)
         self.combobox.currentIndexChanged.connect(self.verifica_combobox)
         self.layout_combobox.addWidget(self.combobox)
         layout_info_projeto.addLayout(self.layout_combobox)
@@ -74,12 +80,16 @@ class GeradorDeProjetos(QWidget):
         
         # Input nome do projeto
         self.input_nome_projeto = QLineEdit()
-        layout_info_projeto.addWidget(self.input_nome_projeto)
+        self.input_nome_projeto.setFixedSize(160,20)
+        self.input_nome_projeto.setObjectName("Input_nome_projeto")
+        layout_info_projeto.addWidget(self.input_nome_projeto, alignment=Qt.AlignHCenter)
         
         # Botão validar
         botao_validar = QPushButton("Validar")
+        botao_validar.setObjectName("Botao_validar")
         botao_validar.clicked.connect(self.display_route)
-        layout_info_projeto.addWidget(botao_validar)
+        botao_validar.setFixedSize(160,20)
+        layout_info_projeto.addWidget(botao_validar, alignment=Qt.AlignHCenter)
         container_info_projetos.setLayout(layout_info_projeto)
         
         return container_info_projetos
@@ -95,7 +105,7 @@ class GeradorDeProjetos(QWidget):
         # layout_label_rota = QHBoxLayout()
         label_input_rota = QLabel("Escolha onde o projeto sera gerado")
         label_input_rota.setObjectName("Label_input_rota")
-        layout_info_rota.addWidget(label_input_rota)
+        layout_info_rota.addWidget(label_input_rota, alignment=Qt.AlignHCenter)
         # layout_info_rota.addLayout(layout_label_rota)
         
         input_rota = self.campo_input_rota()

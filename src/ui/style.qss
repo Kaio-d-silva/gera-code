@@ -1,3 +1,4 @@
+
 #Main {
     background-color: #252b36;
 }
@@ -37,4 +38,20 @@
     background-color: #252B36;
     color: rgba(230, 243, 255, 0.349);
     
+}
+#Combobox{
+    padding:1px
+}
+
+#Combobox, #Botao_validar, #Input_nome_projeto {
+  background-color: #252b36 ;
+  border: none;
+  border-radius : 5px;
+  color: white;
+}
+
+#Container_formulario{
+    border-radius: 5px;
+    padding:10px;
+    background-color: #2c3442
 }
