@@ -53,9 +53,7 @@ class GeradorDeProjetos(QWidget):
         layout_label = QHBoxLayout()
         label_linguagem = QLabel("Selecione uma linguagem")
         label_linguagem.setObjectName("Label_linguagem")
-        layout_label.addStretch()
-        layout_label.addWidget(label_linguagem)
-        layout_label.addStretch()
+        layout_label.addWidget(label_linguagem, alignment=Qt.AlignHCenter)
         layout_info_projeto.addLayout(layout_label)
         
         # Combobox 
@@ -71,10 +69,8 @@ class GeradorDeProjetos(QWidget):
         # Label input
         layout_label_nome = QHBoxLayout()
         label_input_nome = QLabel("Digite o nome do projeto")
-        label_input_nome.setObjectName("Label_input_nome")
-        layout_label_nome.addStretch()
-        layout_label_nome.addWidget(label_input_nome)
-        layout_label_nome.addStretch()
+        label_input_nome.setObjectName("Label_input_nome")    
+        layout_label_nome.addWidget(label_input_nome, alignment=Qt.AlignHCenter)
         layout_info_projeto.addLayout(layout_label_nome)
         
         
@@ -113,16 +109,18 @@ class GeradorDeProjetos(QWidget):
         
         # Botão Gerar Projeto
         botao_gerar_projeto = QPushButton("Gerar Projeto")
+        botao_gerar_projeto.setObjectName("Botao_gerar_projeto")
+        botao_gerar_projeto.setFixedSize(160,25)
         botao_gerar_projeto.clicked.connect(self.generate_project)
-        layout_info_rota.addWidget(botao_gerar_projeto)
+        layout_info_rota.addWidget(botao_gerar_projeto, alignment=Qt.AlignHCenter)
         container_info_rota.setLayout(layout_info_rota)
         
         return container_info_rota
     
     def campo_input_rota(self):
         container_layout_input_rota = QWidget()
-        container_layout_input_rota.setMinimumWidth(30)
-        container_layout_input_rota.setMaximumHeight(40)
+        # container_layout_input_rota.setMinimumWidth(30)
+        container_layout_input_rota.setMaximumHeight(30)
         container_layout_input_rota.setObjectName("Campo_input_rota")
         
         layout_input_rota = QHBoxLayout()
@@ -135,7 +133,7 @@ class GeradorDeProjetos(QWidget):
         # Botão localizar
         botao_localizar = QPushButton("")
         botao_localizar.setObjectName("Botao_localizar")
-        botao_localizar.setIcon(QIcon("src/assets/pasta_carton_vazia.png"))
+        botao_localizar.setIcon(QIcon("src/ui/assets/pasta_carton_vazia.png"))
         botao_localizar.clicked.connect(self.select_path)
         layout_input_rota.addWidget(botao_localizar)
         

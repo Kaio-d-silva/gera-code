@@ -8,8 +8,12 @@
     color: white;
     /* margin: 10px; */
     padding: 10px;
+    border-radius:5px;
 }
 
+/* #info_projeto {
+    margin-top: 100px;
+} */
 #Label_linguagem, #Label_input_nome, #Label_input_rota{
     color: white;
     font-size: 13px;
@@ -33,7 +37,7 @@
 
 #Input_rota{
     font-size: 13px;
-    padding: 5px;
+    padding: 1px;
     border : none;
     background-color: #252B36;
     color: rgba(230, 243, 255, 0.349);
@@ -43,15 +47,16 @@
     padding:1px
 }
 
-#Combobox, #Botao_validar, #Input_nome_projeto {
+#Combobox, #Botao_validar, #Input_nome_projeto, #Botao_gerar_projeto {
   background-color: #252b36 ;
   border: none;
   border-radius : 5px;
   color: white;
 }
 
-#Container_formulario{
+/* #Container_formulario{
     border-radius: 5px;
     padding:10px;
     background-color: #2c3442
-}
+} */
+
